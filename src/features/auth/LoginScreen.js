@@ -1,24 +1,23 @@
 import React from 'react';
 import {StyleSheet, View, Image, Dimensions} from 'react-native';
 import Input from '../../components/Input';
-import useSignIn from './useSignIn';
+import useLogin from './useLogin';
 import {
   getPasswordIsValid,
   getPasswordValue,
   getUsernameIsValid,
   getUsernameValue,
-} from '../../utilites/signInDataHelper';
+} from '../../utils/dataHelper/loginScreenDataHelper';
 import Button from '../../components/Button';
 import logo from '../../assets/imdb.png';
 import star from '../../assets/star.png';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 32,
+    padding: 32,
     width,
-    paddingTop: 32,
   },
   row: {
     width: '100%',
@@ -31,14 +30,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignIn = () => {
+const LoginScreen = () => {
   const {
     password,
     username,
     onChangePassword,
     isSaveDisabled,
     onChangeUsername,
-  } = useSignIn({});
+    onLogin,
+    isLoading,
+  } = useLogin({});
 
   return (
     <KeyboardAwareScrollView enableOnAndroid>
@@ -65,10 +66,15 @@ const SignIn = () => {
         </View>
 
         <View style={styles.row}>
-          <Button disabled={isSaveDisabled} onPress={() => {}} text={'Login'} />
+          <Button
+            disabled={isSaveDisabled}
+            onPress={onLogin}
+            text={'Login'}
+            isLoading={isLoading}
+          />
         </View>
       </View>
     </KeyboardAwareScrollView>
   );
 };
-export default SignIn;
+export default LoginScreen;

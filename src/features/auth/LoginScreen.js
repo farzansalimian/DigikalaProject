@@ -9,8 +9,7 @@ import {
   getUsernameValue,
 } from '../../utils/dataHelper/loginScreenDataHelper';
 import Button from '../../components/Button';
-import logo from '../../assets/imdb.png';
-import star from '../../assets/star.png';
+import logo from '../../assets/imdb.gif';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const {width} = Dimensions.get('window');
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 100,
+    height: 250,
     marginBottom: 12,
   },
 });
@@ -44,7 +43,6 @@ const LoginScreen = () => {
   return (
     <KeyboardAwareScrollView enableOnAndroid>
       <View style={styles.container}>
-        <Image style={styles.image} source={star} />
         <Image style={styles.image} source={logo} />
 
         <View style={styles.row}>

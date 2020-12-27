@@ -9,7 +9,6 @@ import useToastMessage from '../features/errorHandling/useToastMessage';
 const StackScreens = () => {
   useToastMessage();
   const username = useSelector((state) => getStateUsername(state));
-  console.log('username', username);
   return username ? <AppDrawerScreen /> : <AuthStackScreen />;
 };
 

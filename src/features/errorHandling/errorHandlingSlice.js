@@ -9,7 +9,6 @@ const errorHandlingSlice = createSlice({
   initialState,
   reducers: {
     showError: (state, action) => {
-      console.log('action', action)
       state.errorMessage = action.payload;
     },
     clearError: (state, action) => {

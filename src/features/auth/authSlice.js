@@ -18,7 +18,6 @@ const authSlice = createSlice({
   reducers: {
     loginSuccess: (state, action) => {
       const {username, password, token} = action.payload;
-      console.log('action', action);
       state.username = username;
       state.password = password;
       state.token = token;
@@ -49,7 +48,6 @@ export const login = ({username, password} = {}) => async (dispatch) => {
   try {
     dispatch(startLoading());
     const res = await axios.post(AUTH_URL, {username, password});
-    console.log(res);
     dispatch(loginSuccess({username, password, token: getToken(res)}));
   } catch (e) {
     // Todo: implement user friendly message based on error

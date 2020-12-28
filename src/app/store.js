@@ -20,6 +20,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
+  whitelist: ['auth'],
   middleware: getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
@@ -27,11 +28,5 @@ const store = configureStore({
   }),
 });
 
-// if (process.env.NODE_ENV === 'development' && module.hot) {
-//   module.hot.accept('./rootReducer', () => {
-//     const newRootReducer = require('./rootReducer').default;
-//     store.replaceReducer(newRootReducer);
-//   });
-// }
 export const persistor = persistStore(store);
 export default store;

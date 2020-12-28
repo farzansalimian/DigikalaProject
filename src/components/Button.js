@@ -50,8 +50,8 @@ const Button = memo((props) => {
       <View style={styles.row}>
         <View
           opacity={disabled ? 0.5 : 1}
-          style={buttonStyle || styles.container}>
-          <Text style={textStyle || styles.text}>{text}</Text>
+          style={{...styles.container, ...buttonStyle}}>
+          <Text style={{...styles.text, ...textStyle}}>{text}</Text>
         </View>
 
         {isLoading && (
@@ -76,8 +76,8 @@ Button.propTypes = {
 Button.defaultProps = {
   disabled: false,
   isLoading: false,
-  textStyle: null,
-  buttonStyle: null,
+  textStyle: {},
+  buttonStyle: {},
 };
 
 export default Button;

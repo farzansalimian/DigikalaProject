@@ -3,7 +3,7 @@ import React from 'react';
 import AppDrawerScreen from '../navigation/AppDrawerScreen';
 import AuthStackScreen from '../navigation/AuthStackScreen';
 import {useSelector} from 'react-redux';
-import {getStateUsername} from '../utils/dataHelper/reduxAuthDataHelper';
+import {getStateUsername} from '../utils/dataHelper/auth/authReduxDataHelper';
 import useToastMessage from '../features/errorHandling/useToastMessage';
 
 const StackScreens = () => {

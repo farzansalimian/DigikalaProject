@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 import {AUTH_URL} from '../../constants/serverUrls';
-import {getToken} from '../../utils/dataHelper/authApiDataHelper';
+import {getToken} from '../../utils/dataHelper/auth/authApiDataHelper';
 import {showError} from '../errorHandling/errorHandlingSlice';
 
 const initialState = {
@@ -59,10 +59,10 @@ export const login = ({username, password} = {}) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    // const res = await api.post('/api/auth/logout/')
     return dispatch(logoutSuccess());
   } catch (e) {
-    return console.error('error', e.message);
+    // Todo: implement user friendly message based on error
+    dispatch(showError('Something went wrong please try again later!'));
   }
 };
 

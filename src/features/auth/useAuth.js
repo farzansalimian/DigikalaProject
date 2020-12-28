@@ -5,17 +5,17 @@ import {
   getPasswordValue,
   getUsernameIsValid,
   getUsernameValue,
-} from '../../utils/dataHelper/loginScreenDataHelper';
+} from '../../utils/dataHelper/auth/authScreenDataHelper';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from './authSlice';
-import {getStateIsLoading} from '../../utils/dataHelper/reduxAuthDataHelper';
+import {getStateIsLoading} from '../../utils/dataHelper/auth/authReduxDataHelper';
 
 const INITIAL_INPUT_VALUE = {
   isValid: true,
   value: null,
 };
 
-function useLogin({}) {
+function useAuth({}) {
   const [username, setUsername] = useState(INITIAL_INPUT_VALUE);
   const [password, setPassword] = useState(INITIAL_INPUT_VALUE);
 
@@ -58,8 +58,8 @@ function useLogin({}) {
     password,
     isSaveDisabled,
     onLogin,
-    isLoading
+    isLoading,
   };
 }
 
-export default useLogin;
+export default useAuth;

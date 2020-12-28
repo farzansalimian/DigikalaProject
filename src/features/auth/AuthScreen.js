@@ -1,13 +1,13 @@
 import React from 'react';
 import {StyleSheet, View, Image, Dimensions} from 'react-native';
 import Input from '../../components/Input';
-import useLogin from './useLogin';
+import useAuth from './useAuth';
 import {
   getPasswordIsValid,
   getPasswordValue,
   getUsernameIsValid,
   getUsernameValue,
-} from '../../utils/dataHelper/loginScreenDataHelper';
+} from '../../utils/dataHelper/auth/authScreenDataHelper';
 import Button from '../../components/Button';
 import logo from '../../assets/imdb.gif';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const LoginScreen = () => {
+const AuthScreen = () => {
   const {
     password,
     username,
@@ -38,7 +38,7 @@ const LoginScreen = () => {
     onChangeUsername,
     onLogin,
     isLoading,
-  } = useLogin({});
+  } = useAuth({});
 
   return (
     <KeyboardAwareScrollView enableOnAndroid>
@@ -75,4 +75,4 @@ const LoginScreen = () => {
     </KeyboardAwareScrollView>
   );
 };
-export default LoginScreen;
+export default AuthScreen;

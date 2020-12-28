@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getStateErrorMessage} from '../../utils/dataHelper/reduxErrorHandlingDataHelper';
+import {getStateErrorMessage} from '../../utils/dataHelper/errorHandling/errorHandlingReduxDataHelper';
 import {clearError} from './errorHandlingSlice';
 import Toast from 'react-native-root-toast';
 

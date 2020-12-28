@@ -6,11 +6,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {PersistGate} from 'redux-persist/integration/react';
 import StackScreens from './StackScreens';
 import {RootSiblingParent} from 'react-native-root-siblings';
+import Loading from '../components/Loading';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<Loading isFullPage />} persistor={persistor}>
         <RootSiblingParent>
           <NavigationContainer>
             <StackScreens />

@@ -9,26 +9,21 @@ const getStyles = (isInValid) =>
       alignItems: 'center',
       marginLeft: 21,
       marginRight: 21,
-      paddingLeft: 11,
-      paddingRight: 11,
       borderColor: isInValid ? 'red' : '#7B8794',
       borderWidth: 1,
       borderRadius: 32,
-      minHeight: 48,
-      paddingTop: 14,
-      paddingBottom: 15,
       backgroundColor: '#FAF9F7',
     },
     textInput: {
       fontSize: 16,
       color: '#1F2933',
-      padding: 0,
+      padding: 16,
       flex: 1,
-      paddingLeft: 16,
+      minHeight: 32,
     },
   });
 
-const Input = memo((props) => {
+function Input(props) {
   const {
     onChangeText,
     value,
@@ -36,6 +31,7 @@ const Input = memo((props) => {
     isInValid,
     containerStyle,
     textStyle,
+    autoFocus,
   } = props;
   const styles = getStyles(isInValid);
 
@@ -47,10 +43,11 @@ const Input = memo((props) => {
         style={textStyle || styles.textInput}
         placeholder={placeholder}
         placeholderTextColor={'#7B8794'}
+        autoFocus={autoFocus}
       />
     </View>
   );
-});
+}
 
 Input.propTypes = {
   value: PropTypes.string,
@@ -59,9 +56,11 @@ Input.propTypes = {
   isInValid: PropTypes.bool,
   containerStyle: PropTypes.instanceOf(Object),
   textStyle: PropTypes.instanceOf(Object),
+  autoFocus: PropTypes.bool,
 };
 
 Input.defaultProps = {
+  autoFocus: false,
   value: null,
   isInValid: false,
   placeholder: null,
@@ -69,4 +68,4 @@ Input.defaultProps = {
   textStyle: null,
 };
 
-export default Input;
+export default memo(Input);

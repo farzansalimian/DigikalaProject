@@ -1,20 +1,20 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import Screens from './Screens';
-import LoginScreen from '../features/auth/LoginScreen';
+import SCREENS from '../constants/screens';
+import AuthScreen from '../features/auth/AuthScreen';
 
 const screenOptions = () => ({
-  initialRouteName: Screens.SIGN_IN,
+  initialRouteName: SCREENS.SIGN_IN,
   headerShown: false,
 });
 
 const AuthStack = createStackNavigator();
-const AuthStackScreen = () => (
-  <>
+function AuthStackScreen() {
+  return (
     <AuthStack.Navigator screenOptions={screenOptions}>
-      <AuthStack.Screen name={Screens.SIGN_IN} component={LoginScreen} />
+      <AuthStack.Screen name={SCREENS.SIGN_IN} component={AuthScreen} />
     </AuthStack.Navigator>
-  </>
-);
+  );
+}
 
 export default AuthStackScreen;

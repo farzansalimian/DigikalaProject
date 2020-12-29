@@ -1,8 +1,7 @@
-const Screens = {
+const SCREENS = {
   SIGN_IN: 'SIGN_IN',
-  HOME: 'HOME',
   CATEGORIES: 'CATEGORIES',
   MOVIES: 'MOVIES',
 };
 
-export default Screens;
+export default SCREENS;

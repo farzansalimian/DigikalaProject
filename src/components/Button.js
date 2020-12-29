@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = memo((props) => {
+function Button(props) {
   const {text, onPress, disabled, textStyle, buttonStyle, isLoading} = props;
 
   return (
@@ -50,8 +50,8 @@ const Button = memo((props) => {
       <View style={styles.row}>
         <View
           opacity={disabled ? 0.5 : 1}
-          style={buttonStyle || styles.container}>
-          <Text style={textStyle || styles.text}>{text}</Text>
+          style={{...styles.container, ...buttonStyle}}>
+          <Text style={{...styles.text, ...textStyle}}>{text}</Text>
         </View>
 
         {isLoading && (
@@ -62,7 +62,7 @@ const Button = memo((props) => {
       </View>
     </TouchableHighlight>
   );
-});
+}
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
@@ -76,8 +76,8 @@ Button.propTypes = {
 Button.defaultProps = {
   disabled: false,
   isLoading: false,
-  textStyle: null,
-  buttonStyle: null,
+  textStyle: {},
+  buttonStyle: {},
 };
 
-export default Button;
+export default memo(Button);

@@ -11,6 +11,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import {AUTH} from '../constants/reducerNames';
 
 const persistConfig = {
   key: 'root',
@@ -20,18 +21,15 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
+  whitelist: [AUTH],
   middleware: getDefaultMiddleware({
+    // Fix collision with redux toolkit see
+    // https://github.com/reduxjs/redux-toolkit/issues/121
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
 });
 
-// if (process.env.NODE_ENV === 'development' && module.hot) {
-//   module.hot.accept('./rootReducer', () => {
-//     const newRootReducer = require('./rootReducer').default;
-//     store.replaceReducer(newRootReducer);
-//   });
-// }
 export const persistor = persistStore(store);
 export default store;

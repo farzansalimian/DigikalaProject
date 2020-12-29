@@ -1,22 +1,33 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import Screens from './Screens';
-import Home from '../containers/Home';
-import Categories from '../containers/Categories';
-import Movies from '../containers/Movies';
+import SCREENS from '../constants/screens';
+import MoviesScreen from '../features/movies/MoviesScreen';
+import CategoriesScreen from '../features/categories/CategoriesScreen';
+import CustomDrawerContent from './CustomDrawerContent';
 
 const screenOptions = () => ({
-  initialRouteName: Screens.HOME,
+  initialRouteName: SCREENS.MOVIES,
 });
 
 const AppDrawer = createDrawerNavigator();
 
-const AppDrawerScreen = () => (
-  <AppDrawer.Navigator screenOptions={screenOptions}>
-    <AppDrawer.Screen name={Screens.HOME} component={Home} />
-    <AppDrawer.Screen name={Screens.CATEGORIES} component={Categories} />
-    <AppDrawer.Screen name={Screens.MOVIES} component={Movies} />
-  </AppDrawer.Navigator>
-);
+function AppDrawerScreen() {
+  return (
+    <AppDrawer.Navigator
+      screenOptions={screenOptions}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}>
+      <AppDrawer.Screen
+        unmountOnBlur
+        name={SCREENS.MOVIES}
+        component={MoviesScreen}
+      />
+      <AppDrawer.Screen
+        unmountOnBlur
+        name={SCREENS.CATEGORIES}
+        component={CategoriesScreen}
+      />
+    </AppDrawer.Navigator>
+  );
+}
 
 export default AppDrawerScreen;

@@ -34,19 +34,15 @@
 
 # Screens
 
-## <img src="/home/farzan/.config/Typora/typora-user-images/image-20201229200908515.png" alt="image-20201229200908515" style="zoom: 25%;" />    Login screen
 
-## <img src="/home/farzan/.config/Typora/typora-user-images/image-20201229201139170.png" alt="image-20201229201139170" style="zoom: 25%;" />    Home & search screen
-
-
-
-
-
-## <img src="/home/farzan/.config/Typora/typora-user-images/image-20201229201335334.png" alt="image-20201229201335334" style="zoom:25%;" /> Categories List
-
-
-
-## <img src="/home/farzan/.config/Typora/typora-user-images/image-20201229201431753.png" alt="image-20201229201431753" style="zoom:25%;" /> Category Movies
+# Login screen
+## <img width="270" height="480" src="https://github.com/farzansalimian/DigikalaProject/blob/master/docImages/login.png" alt="image-20201229200908515" style="zoom: 25%;" />    
+# Home & search screen
+## <img width="270" height="480" src="https://github.com/farzansalimian/DigikalaProject/blob/master/docImages/search.png" alt="image-20201229201139170" style="zoom: 25%;" />    
+# Categories List
+## <img width="270" height="480" src="https://github.com/farzansalimian/DigikalaProject/blob/master/docImages/categories.png" alt="image-20201229201335334" style="zoom:25%;" /> 
+# Category Movies
+## <img width="270" height="480" src="https://github.com/farzansalimian/DigikalaProject/blob/master/docImages/categoryMovie.png" alt="image-20201229201431753" style="zoom:25%;" /> 
 
 
 
@@ -54,7 +50,7 @@
 
 This project is build based on feature folder pattern.
 
-![image-20201229202304077](/home/farzan/.config/Typora/typora-user-images/image-20201229202304077.png)
+<img width="270" height="480" src="https://github.com/farzansalimian/DigikalaProject/blob/master/docImages/structure.png" style="zoom:25%;" />
 
 
 

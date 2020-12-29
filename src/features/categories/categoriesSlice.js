@@ -6,11 +6,11 @@ import {
   getCategoriesNextUrl,
   getCategoriesResult,
 } from '../../utils/dataHelper/categories/categoriesApiDataHelper';
+import {showError} from '../errorHandling/errorHandlingSlice';
 
 const initialState = {
   items: [],
   isLoading: false,
-  searchErrorMessage: null,
   nextUrl: null,
 };
 
@@ -23,25 +23,18 @@ const categoriesSlice = createSlice({
       state.items = [...state.items, ...items];
       state.nextUrl = nextUrl;
     },
-    fetchError: (state, action) => {
-      state.searchErrorMessage = action.payload;
-    },
-    startLoading: (state, action) => {
+    startLoading: (state) => {
       state.isLoading = true;
     },
-    endLoading: (state, action) => {
+    endLoading: (state) => {
       state.isLoading = false;
     },
-    clearCategories: (state, action) => {
-      state.items = [];
-      state.nextUrl = null;
-    },
+    clearCategories: () => initialState,
   },
 });
 
 export const {
   fetchSuccess,
-  fetchError,
   startLoading,
   endLoading,
   clearCategories,
@@ -63,7 +56,7 @@ export const fetchCategories = () => async (dispatch) => {
     );
   } catch (e) {
     // Todo: implement user friendly message based on error
-    dispatch(fetchError('Something went wrong please try again later!'));
+    dispatch(showError('Something went wrong please try again later!'));
   } finally {
     dispatch(endLoading());
   }
@@ -84,7 +77,7 @@ export const loadMoreCategories = () => async (dispatch, getState) => {
     );
   } catch (e) {
     // Todo: implement user friendly message based on error
-    dispatch(fetchError('Something went wrong please try again later!'));
+    dispatch(showError('Something went wrong please try again later!'));
   } finally {
     dispatch(endLoading());
   }

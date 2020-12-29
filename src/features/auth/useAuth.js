@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import {useMemo, useState} from 'react';
 import {isUsernameValid, isPasswordValid} from '../../utils/authUtils';
 import {
   getPasswordIsValid,
@@ -8,7 +8,7 @@ import {
 } from '../../utils/dataHelper/auth/authScreenDataHelper';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from './authSlice';
-import {getStateIsLoading} from '../../utils/dataHelper/auth/authReduxDataHelper';
+import {getStateAuthIsLoading} from '../../utils/dataHelper/auth/authReduxDataHelper';
 
 const INITIAL_INPUT_VALUE = {
   isValid: true,
@@ -20,15 +20,15 @@ function useAuth({}) {
   const [password, setPassword] = useState(INITIAL_INPUT_VALUE);
 
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => getStateIsLoading(state));
+  const isLoading = useSelector((state) => getStateAuthIsLoading(state));
 
-  const onChangePassword = useCallback((value) => {
+  const onChangePassword = (value) => {
     setPassword({value, isValid: isPasswordValid(value)});
-  }, []);
+  };
 
-  const onChangeUsername = useCallback((value) => {
+  const onChangeUsername = (value) => {
     setUsername({value, isValid: isUsernameValid(value)});
-  }, []);
+  };
 
   const isSaveDisabled = useMemo(
     () =>
@@ -39,7 +39,7 @@ function useAuth({}) {
     [username, password],
   );
 
-  const onLogin = useCallback(() => {
+  const onLogin = () => {
     if (isSaveDisabled) {
       return;
     }
@@ -49,7 +49,7 @@ function useAuth({}) {
         password: getPasswordValue(password),
       }),
     );
-  }, [username, password, isSaveDisabled]);
+  };
 
   return {
     onChangePassword,

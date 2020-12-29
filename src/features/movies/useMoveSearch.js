@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {searchMovies, clearSearch, loadMoreMovies} from './moviesSlice';
 import {
@@ -16,13 +16,13 @@ function useMovieSearch({categoryName}) {
   const isFocused = useIsFocused();
   const navigation = useNavigation();
 
-  const onTitleSearchTermChange = useCallback((value) => {
+  const onTitleSearchTermChange = (value) => {
     setTitleSearchTerm(value);
-  }, []);
+  };
 
-  const onEndReached = useCallback(() => {
+  const onEndReached = () => {
     dispatch(loadMoreMovies());
-  }, []);
+  };
 
   useEffect(() => {
     // If screen is not focus do not proceed

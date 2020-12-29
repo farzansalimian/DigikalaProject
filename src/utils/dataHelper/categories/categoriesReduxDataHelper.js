@@ -1,7 +1,9 @@
 import get from 'lodash/get';
+import {CATEGORIES} from '../../../constants/reducerNames';
 
-export const getStateCategories = (state) => get(state, 'categories.items', []);
+export const getStateCategories = (state) =>
+  get(state, `${CATEGORIES}.items`, []);
 export const getStateCategoriesIsLoading = (state) =>
-  get(state, 'categories.isLoading');
+  get(state, `${CATEGORIES}.isLoading`);
 export const getStateCategoriesNextUrl = (state) =>
-  get(state, 'categories.nextUrl');
+  get(state, `${CATEGORIES}.nextUrl`);

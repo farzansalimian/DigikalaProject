@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useState} from 'react';
+import React, {memo, useState} from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import PropTypes from 'prop-types';
 import {
@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const Movie = memo((props) => {
+function Movie(props) {
   const {data} = props;
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const toggleCollapsed = useCallback(() => {
+  const toggleCollapsed = () => {
     setIsCollapsed((prev) => !prev);
-  }, []);
+  };
 
   return (
     <View style={styles.container}>
@@ -129,10 +129,10 @@ const Movie = memo((props) => {
       <Divider marginTop={8} marginBottom={8} />
     </View>
   );
-});
+}
 
 Movie.defaultProps = {};
 Movie.propTypes = {
   data: PropTypes.instanceOf(Object).isRequired,
 };
-export default Movie;
+export default memo(Movie);

@@ -8,7 +8,7 @@ import StackScreens from './StackScreens';
 import {RootSiblingParent} from 'react-native-root-siblings';
 import Loading from '../components/Loading';
 
-const App = () => {
+function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={<Loading isFullPage />} persistor={persistor}>
@@ -20,6 +20,6 @@ const App = () => {
       </PersistGate>
     </Provider>
   );
-};
+}
 
 export default App;

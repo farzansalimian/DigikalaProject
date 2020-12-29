@@ -1,6 +1,6 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
-import Screens from './Screens';
+import SCREENS from '../constants/screens';
 import {useDispatch} from 'react-redux';
 import {logout} from '../features/auth/authSlice';
 
@@ -8,17 +8,17 @@ function CustomDrawerContent(props) {
   const {navigation} = props;
   const dispatch = useDispatch();
 
-  const homeOnPress = useCallback(() => {
-    navigation.navigate(Screens.MOVIES, {categoryName: null});
-  }, []);
+  const homeOnPress = () => {
+    navigation.navigate(SCREENS.MOVIES, {categoryName: null});
+  };
 
-  const categoriesOnPress = useCallback(() => {
-    navigation.navigate(Screens.CATEGORIES);
-  }, []);
+  const categoriesOnPress = () => {
+    navigation.navigate(SCREENS.CATEGORIES);
+  };
 
-  const logoutOnPress = useCallback(() => {
+  const logoutOnPress = () => {
     dispatch(logout());
-  }, []);
+  };
 
   return (
     <DrawerContentScrollView {...props}>

@@ -6,12 +6,12 @@ import {
   getMoviesResult,
 } from '../../utils/dataHelper/movies/moviesApiDataHelper';
 import {getStateMoviesNextUrl} from '../../utils/dataHelper/movies/moviesReduxDataHelper';
+import {showError} from '../errorHandling/errorHandlingSlice';
 
 const initialState = {
   items: [],
   titleSearchTerm: null,
   isLoading: false,
-  searchErrorMessage: null,
   nextUrl: null,
 };
 
@@ -25,26 +25,18 @@ const moviesSlice = createSlice({
       state.titleSearchTerm = titleSearchTerm || state.titleSearchTerm;
       state.nextUrl = nextUrl;
     },
-    searchError: (state, action) => {
-      state.searchErrorMessage = action.payload;
-    },
-    startLoading: (state, action) => {
+    startLoading: (state) => {
       state.isLoading = true;
     },
-    endLoading: (state, action) => {
+    endLoading: (state) => {
       state.isLoading = false;
     },
-    clearSearch: (state, action) => {
-      state.items = [];
-      state.titleSearchTerm = null;
-      state.nextUrl = null;
-    },
+    clearSearch: () => initialState,
   },
 });
 
 export const {
   searchSuccess,
-  searchError,
   startLoading,
   endLoading,
   clearSearch,
@@ -71,7 +63,7 @@ export const searchMovies = ({titleSearchTerm, categoryName} = {}) => async (
     );
   } catch (e) {
     // Todo: implement user friendly message based on error
-    dispatch(searchError('Something went wrong please try again later!'));
+    dispatch(showError('Something went wrong please try again later!'));
   } finally {
     dispatch(endLoading());
   }
@@ -92,7 +84,7 @@ export const loadMoreMovies = () => async (dispatch, getState) => {
     );
   } catch (e) {
     // Todo: implement user friendly message based on error
-    dispatch(searchError('Something went wrong please try again later!'));
+    dispatch(showError('Something went wrong please try again later!'));
   } finally {
     dispatch(endLoading());
   }

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = memo((props) => {
+function Button(props) {
   const {text, onPress, disabled, textStyle, buttonStyle, isLoading} = props;
 
   return (
@@ -62,7 +62,7 @@ const Button = memo((props) => {
       </View>
     </TouchableHighlight>
   );
-});
+}
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
@@ -80,4 +80,4 @@ Button.defaultProps = {
   buttonStyle: {},
 };
 
-export default Button;
+export default memo(Button);

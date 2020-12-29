@@ -20,14 +20,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-const Loading = memo((props) => {
+
+function Loading(props) {
   const {isFullPage} = props;
   return (
     <View style={isFullPage ? styles.fullPage : styles.row}>
       <ActivityIndicator size="small" color="#0000ff" />
     </View>
   );
-});
+}
 
 Loading.defaultProps = {
   isFullPage: false,
@@ -35,4 +36,5 @@ Loading.defaultProps = {
 Loading.propTypes = {
   isFullPage: PropTypes.bool,
 };
-export default Loading;
+
+export default memo(Loading);

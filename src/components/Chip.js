@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Chip = memo((props) => {
+function Chip(props) {
   const {
     leftIcon,
     rightIcon,
@@ -41,7 +41,7 @@ const Chip = memo((props) => {
   } = props;
 
   if (!text) {
-    return null;
+    return <></>;
   }
   return (
     <View
@@ -60,7 +60,7 @@ const Chip = memo((props) => {
       )}
     </View>
   );
-});
+}
 
 Chip.defaultProps = {
   leftIcon: null,
@@ -88,4 +88,4 @@ Chip.propTypes = {
   rightIconStyle: PropTypes.instanceOf(Object),
 };
 
-export default Chip;
+export default memo(Chip);

@@ -12,7 +12,6 @@ function useToastMessage() {
     if (!errorMessage) {
       return;
     }
-
     let toast = Toast.show(errorMessage, {
       duration: Toast.durations.LONG,
       position: Toast.positions.BOTTOM,
@@ -20,17 +19,10 @@ function useToastMessage() {
       animation: true,
       hideOnPress: true,
       delay: 0,
-      onShow: () => {},
-      onShown: () => {},
-      onHide: () => {},
-      onHidden: () => {
-        dispatch(clearError());
-      },
     });
-
-    // You can manually hide the Toast, or it will automatically disappear after a `duration` ms timeout.
     setTimeout(function () {
       Toast.hide(toast);
+      dispatch(clearError());
     }, 500);
   }, [errorMessage]);
 

@@ -1,4 +1,4 @@
-import {useCallback, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   clearCategories,
@@ -16,9 +16,9 @@ function useCategories({}) {
   const categories = useSelector((state) => getStateCategories(state));
   const isLoading = useSelector((state) => getStateCategoriesIsLoading(state));
 
-  const onEndReached = useCallback(() => {
+  const onEndReached = () => {
     dispatch(loadMoreCategories());
-  }, []);
+  };
 
   const isFocused = useIsFocused();
 

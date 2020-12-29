@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const AuthScreen = () => {
+function AuthScreen() {
   const {
     password,
     username,
@@ -41,7 +41,9 @@ const AuthScreen = () => {
   } = useAuth({});
 
   return (
-    <KeyboardAwareScrollView enableOnAndroid>
+    <KeyboardAwareScrollView
+      enableOnAndroid
+      keyboardShouldPersistTaps="handled">
       <View style={styles.container}>
         <Image style={styles.image} source={logo} />
 
@@ -74,5 +76,5 @@ const AuthScreen = () => {
       </View>
     </KeyboardAwareScrollView>
   );
-};
+}
 export default AuthScreen;

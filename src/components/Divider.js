@@ -11,7 +11,7 @@ const getStyles = (extraStyles) =>
     },
   });
 
-const Divider = memo((props) => {
+function Divider(props) {
   const {marginBottom, marginTop, isHidden, marginLeft, marginRight} = props;
   const styles = getStyles({
     marginBottom,
@@ -21,10 +21,10 @@ const Divider = memo((props) => {
   });
 
   if (isHidden) {
-    return null;
+    return <></>;
   }
   return <View style={styles.container} />;
-});
+}
 
 Divider.defaultProps = {
   marginTop: 0,
@@ -42,4 +42,4 @@ Divider.propTypes = {
   isHidden: PropTypes.bool,
 };
 
-export default Divider;
+export default memo(Divider);

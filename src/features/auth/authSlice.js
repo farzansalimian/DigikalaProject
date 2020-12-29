@@ -3,17 +3,18 @@ import axios from 'axios';
 import {AUTH_URL} from '../../constants/serverUrls';
 import {getToken} from '../../utils/dataHelper/auth/authApiDataHelper';
 import {showError} from '../errorHandling/errorHandlingSlice';
+import {clearCategories} from '../categories/categoriesSlice';
+import {clearSearch} from '../movies/moviesSlice';
 
 const initialState = {
   username: null,
   password: null,
   token: null,
   isLoading: false,
-  errorMessage: null,
 };
 
 const authSlice = createSlice({
-  name: 'signIn',
+  name: 'auth',
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
@@ -21,17 +22,16 @@ const authSlice = createSlice({
       state.username = username;
       state.password = password;
       state.token = token;
-      state.errorMessage = null;
     },
     logoutSuccess: (state, action) => {
       state.username = null;
       state.token = null;
       state.isLoading = false;
     },
-    startLoading: (state, action) => {
+    startLoading: (state) => {
       state.isLoading = true;
     },
-    endLoading: (state, action) => {
+    endLoading: (state) => {
       state.isLoading = false;
     },
   },
@@ -51,15 +51,17 @@ export const login = ({username, password} = {}) => async (dispatch) => {
     dispatch(loginSuccess({username, password, token: getToken(res)}));
   } catch (e) {
     // Todo: implement user friendly message based on error
-    dispatch(showError('Something went wrong please try again later!'));
+    dispatch(showError('Wrong user name or password!'));
   } finally {
     dispatch(endLoading());
   }
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => (dispatch) => {
   try {
-    return dispatch(logoutSuccess());
+    dispatch(logoutSuccess());
+    dispatch(clearCategories());
+    dispatch(clearSearch());
   } catch (e) {
     // Todo: implement user friendly message based on error
     dispatch(showError('Something went wrong please try again later!'));

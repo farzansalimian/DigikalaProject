@@ -1,5 +1,5 @@
-import React, {memo, useCallback} from 'react';
-import {View, StyleSheet, Dimensions, Text} from 'react-native';
+import React, {useCallback} from 'react';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import Input from '../../components/Input';
 import useMovieSearch from './useMoveSearch';
 import List from '../../components/List';
@@ -24,8 +24,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     backgroundColor: '#FAD7A0',
   },
+  noRowRendererChip: {
+    marginHorizontal: 20,
+  },
 });
-const MoviesScreen = memo((props) => {
+function MoviesScreen(props) {
   const {route} = props;
   const categoryName = getCategoryNameParam(route);
   const {
@@ -39,9 +42,20 @@ const MoviesScreen = memo((props) => {
   const rowRenderer = useCallback((type, data, index) => {
     return <Movie data={data} />;
   }, []);
+
+  const noRowRenderer = useCallback(() => {
+    return (
+      <Chip
+        containerStyle={styles.noRowRendererChip}
+        text={'No item to show!'}
+      />
+    );
+  }, []);
+
   return (
     <View style={styles.container}>
       <Input
+        autoFocus
         onChangeText={onTitleSearchTermChange}
         value={titleSearchTerm}
         placeholder={'Search move title'}
@@ -51,6 +65,8 @@ const MoviesScreen = memo((props) => {
 
       <View style={styles.list}>
         <List
+          noRowRenderer={noRowRenderer}
+          isSearchActive={categoryName || titleSearchTerm}
           canChangeSize
           forceNonDeterministicRendering
           items={movies}
@@ -61,7 +77,7 @@ const MoviesScreen = memo((props) => {
       </View>
     </View>
   );
-});
+}
 
 MoviesScreen.defaultProps = {};
 MoviesScreen.propTypes = {

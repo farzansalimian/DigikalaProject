@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useRef} from 'react';
+import React, {useRef} from 'react';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import {Dimensions, StyleSheet, View} from 'react-native';
 import Loading from './Loading';
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-const List = memo((props) => {
+function List(props) {
   const {
     extendedState,
     items,
@@ -21,6 +21,8 @@ const List = memo((props) => {
     forceNonDeterministicRendering,
     isLoading,
     onEndReached,
+    isSearchActive,
+    noRowRenderer,
   } = props;
 
   const listRef = useRef(null);
@@ -35,16 +37,22 @@ const List = memo((props) => {
   );
 
   // Show spinner when more data is loading
-  const renderFooter = useCallback(() => {
+  const renderFooter = () => {
     return isLoading ? <Loading /> : null;
-  }, [isLoading]);
+  };
+
+  const isListEmpty = !items || items.length === 0;
 
   // Show spinner if list is empty and data is loading
-  if (isLoading && items.length === 0) {
+  if (isLoading && isListEmpty) {
     return <Loading />;
   }
-  if (items.length === 0) {
-    return null;
+  // Place holder when there is no result and search is active
+  if (isSearchActive && isListEmpty && !isLoading) {
+    return noRowRenderer();
+  }
+  if (isListEmpty) {
+    return <></>;
   }
   return (
     <View style={styles.container}>
@@ -62,7 +70,7 @@ const List = memo((props) => {
       />
     </View>
   );
-});
+}
 
 List.defaultProps = {
   extendedState: null,
@@ -70,8 +78,10 @@ List.defaultProps = {
   canChangeSize: false,
   forceNonDeterministicRendering: false,
   isLoading: false,
+  isSearchActive: false,
 };
 List.propTypes = {
+  isSearchActive: PropTypes.bool,
   rowRenderer: PropTypes.func.isRequired,
   extendedState: PropTypes.instanceOf(Array),
   items: PropTypes.instanceOf(Array).isRequired,
@@ -80,5 +90,6 @@ List.propTypes = {
   forceNonDeterministicRendering: PropTypes.bool,
   isLoading: PropTypes.bool,
   onEndReached: PropTypes.func.isRequired,
+  noRowRenderer: PropTypes.func.isRequired,
 };
 export default List;

@@ -11,6 +11,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import {AUTH} from '../constants/reducerNames';
 
 const persistConfig = {
   key: 'root',
@@ -20,8 +21,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-  whitelist: ['auth'],
+  whitelist: [AUTH],
   middleware: getDefaultMiddleware({
+    // Fix collision with redux toolkit see
+    // https://github.com/reduxjs/redux-toolkit/issues/121
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },

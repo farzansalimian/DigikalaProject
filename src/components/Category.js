@@ -1,10 +1,10 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo} from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import PropTypes from 'prop-types';
 import Divider from './Divider';
 import {getCategoryName} from '../utils/dataHelper/categories/categoriesDataHelper';
 import {useNavigation} from '@react-navigation/native';
-import Screens from '../navigation/Screens';
+import SCREENS from '../constants/screens';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const Category = memo((props) => {
+function Category(props) {
   const {data} = props;
   const navigation = useNavigation();
   const categoryName = getCategoryName(data);
 
-  const onPress = useCallback(() => {
-    navigation.navigate(Screens.MOVIES, {categoryName: categoryName});
-  }, [categoryName]);
+  const onPress = () => {
+    navigation.navigate(SCREENS.MOVIES, {categoryName: categoryName});
+  };
 
   return (
     <TouchableHighlight
@@ -41,10 +41,10 @@ const Category = memo((props) => {
       </View>
     </TouchableHighlight>
   );
-});
+}
 
 Category.defaultProps = {};
 Category.propTypes = {
   data: PropTypes.instanceOf(Object).isRequired,
 };
-export default Category;
+export default memo(Category);

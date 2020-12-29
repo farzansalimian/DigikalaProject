@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {useCallback} from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import List from '../../components/List';
 import useCategories from './useCategories';
@@ -17,12 +17,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-const CategoriesScreen = memo(() => {
+function CategoriesScreen() {
   const {categories, isLoading, onEndReached} = useCategories({});
 
   const rowRenderer = useCallback((type, data, index) => {
     return <Category data={data} />;
   }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.list}>
@@ -37,7 +38,7 @@ const CategoriesScreen = memo(() => {
       </View>
     </View>
   );
-});
+}
 
 CategoriesScreen.defaultProps = {};
 CategoriesScreen.propTypes = {};
